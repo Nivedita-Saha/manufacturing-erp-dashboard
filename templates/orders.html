@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Order Report</h2>
+<div class="filter-bar">
+    <form method="GET" action="/orders" style="display:flex; gap:12px;">
+        <select name="status">
+            <option value="">All Statuses</option>
+            <option value="Pending" {% if status == 'Pending' %}selected{% endif %}>Pending</option>
+            <option value="In Progress" {% if status == 'In Progress' %}selected{% endif %}>In Progress</option>
+            <option value="Completed" {% if status == 'Completed' %}selected{% endif %}>Completed</option>
+            <option value="Cancelled" {% if status == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Order Date</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            <th>Total Value</th>
+            <th>Work Orders</th>
+            <th>Units Produced</th>
+            <th>Delivery Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+        <tr>
+            <td>#{{ row.order_id }}</td>
+            <td>{{ row.customer_name }}</td>
+            <td>{{ row.order_date }}</td>
+            <td>{{ row.due_date }}</td>
+            <td>
+                <span class="badge badge-{{ row.status | lower | replace(' ', '') }}">
+                    {{ row.status }}
+                </span>
+            </td>
+            <td>£{{ "{:,.2f}".format(row.total_value) }}</td>
+            <td>{{ row.total_work_orders }}</td>
+            <td>{{ row.total_units_produced or 0 }}</td>
+            <td>
+                <span class="badge badge-{{ row.delivery_status | lower | replace(' ', '') }}">
+                    {{ row.delivery_status }}
+                </span>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

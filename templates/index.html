@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>ERP Reporting Dashboard</h2>
+<p style="color:#666; margin-bottom:28px;">Manufacturing operations reporting system — powered by PostgreSQL and Flask.</p>
+<div class="cards">
+    <div class="card">
+        <h3>Order Report</h3>
+        <p>📦</p>
+        <p style="font-size:14px; color:#666; margin-top:8px;">CTE + multi-table joins. View all orders with delivery status and work order progress.</p>
+        <a href="/orders" style="display:inline-block; margin-top:16px; padding:8px 16px;
+           background:#1a2e4a; color:#fff; border-radius:6px; text-decoration:none; font-size:13px;">View Report</a>
+    </div>
+    <div class="card">
+        <h3>Production Report</h3>
+        <p>🏭</p>
+        <p style="font-size:14px; color:#666; margin-top:8px;">Aggregation across joins. Defect rates and output by operator and machine.</p>
+        <a href="/production" style="display:inline-block; margin-top:16px; padding:8px 16px;
+           background:#1a2e4a; color:#fff; border-radius:6px; text-decoration:none; font-size:13px;">View Report</a>
+    </div>
+    <div class="card">
+        <h3>Stock Risk Report</h3>
+        <p>⚠️</p>
+        <p style="font-size:14px; color:#666; margin-top:8px;">Advanced CTE + window functions. Parts stock risk ranked by projected shortfall.</p>
+        <a href="/stock" style="display:inline-block; margin-top:16px; padding:8px 16px;
+           background:#1a2e4a; color:#fff; border-radius:6px; text-decoration:none; font-size:13px;">View Report</a>
+    </div>
+</div>
+{% endblock %}

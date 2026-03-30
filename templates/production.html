@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Production Performance Report</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Operator</th>
+            <th>Machine</th>
+            <th>Total Runs</th>
+            <th>Total Units</th>
+            <th>Total Defects</th>
+            <th>Defect Rate %</th>
+            <th>Avg Units / Run</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+        <tr>
+            <td>{{ row.operator }}</td>
+            <td>{{ row.machine_id }}</td>
+            <td>{{ row.total_runs }}</td>
+            <td>{{ row.total_units }}</td>
+            <td>{{ row.total_defects }}</td>
+            <td>
+                <span class="badge {% if row.defect_rate_pct > 5 %}badge-critical
+                                   {% elif row.defect_rate_pct > 2 %}badge-low
+                                   {% else %}badge-healthy{% endif %}">
+                    {{ row.defect_rate_pct }}%
+                </span>
+            </td>
+            <td>{{ row.avg_units_per_run }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

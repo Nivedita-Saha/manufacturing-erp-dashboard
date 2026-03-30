@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Stock Risk Report</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Part Code</th>
+            <th>Part Name</th>
+            <th>Supplier</th>
+            <th>Lead Time (days)</th>
+            <th>Stock Qty</th>
+            <th>Total Required</th>
+            <th>Projected Remaining</th>
+            <th>Stock Value</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+        <tr>
+            <td>{{ row.part_code }}</td>
+            <td>{{ row.part_name }}</td>
+            <td>{{ row.supplier_name }}</td>
+            <td>{{ row.lead_time_days }}</td>
+            <td>{{ row.stock_quantity }}</td>
+            <td>{{ row.total_required or 0 }}</td>
+            <td>{{ row.projected_remaining }}</td>
+            <td>£{{ "{:,.2f}".format(row.stock_value) }}</td>
+            <td>
+                <span class="badge badge-{{ row.stock_status | lower }}">
+                    {{ row.stock_status }}
+                </span>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
